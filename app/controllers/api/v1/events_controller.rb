@@ -1,6 +1,10 @@
 module Api
   module V1
     class EventsController < Api::V1::ApplicationController
+      def index
+        render json: @user.events.to_a, each_serializer: EventSerializer
+      end
+
       def create
         if has_params?(*required_params)
           if event = @user.events.create(create_event_options)
