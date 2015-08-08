@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     resources :events, only: [:create, :index, :show]
     resources :rsvps, only: [:create, :update, :show]
+    resources :bills, only: [:create, :show, :update]
   end
 end
