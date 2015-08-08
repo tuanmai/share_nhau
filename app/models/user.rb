@@ -37,6 +37,8 @@ class User
     "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=1629273283955926&client_secret=53d9126cde330907cb687d2be4890cc2&fb_exchange_token=#{self.token}"
   end
 
-  def user_friends
+  def friends
+    friend_ids = UserFriend.any_of([{user_1: self}, {user_2: self}]).pluck(:user_1_id, :user_2_id).flatten.map(&:to_s).uniq - [self.id.to_s]
+    User.where(:id.in => friend_ids)
   end
 end

@@ -35,7 +35,7 @@ module Api
 
       private
       def required_params
-        %w(user_ids event_id)
+        %w(event_id)
       end
 
       def create_event_options

@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :events, only: [:create, :index, :show]
     resources :rsvps, only: [:create, :update, :show]
     resources :bills, only: [:create, :show, :update]
+    resources :friends, only: [:index]
   end
 end
