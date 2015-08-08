@@ -24,6 +24,8 @@ class User
   field :fb_id,              type: String
   field :expired_in,         type: Date
 
+  has_many :events
+
   def set_long_live_token
     if !expired_in || 2.days.from_now > expired_in
       @long_live_token = CGI::parse(HTTParty.get(facebook_graph_long_live_url).parsed_response)
