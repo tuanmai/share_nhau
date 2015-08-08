@@ -38,6 +38,7 @@ gem 'will_paginate_mongoid'
 gem 'mongoid'
 gem 'mongoid-indifferent-access', require: 'mongoid_indifferent_access'
 gem 'bson_ext'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

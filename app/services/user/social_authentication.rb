@@ -25,21 +25,13 @@ module Services
           token: authorization.token,
           expires: authorization.expires,
           platform: authorization.platform,
-          user: user_data
+          user: UserSerializer.new(user)
         }
       end
 
       protected
       def creator_class
         ::Services::User::FacebookCreator
-      end
-
-      def user_data
-        {
-          _id: user.id,
-          name: user.name,
-          email: user.email
-        }
       end
 
       def default
