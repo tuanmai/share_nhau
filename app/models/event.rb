@@ -19,7 +19,7 @@ class Event
   end
 
   def bill_for_user
-    total_attendance = self.rsvps.where(going: true).count
+    total_attendance = self.rsvps.count
     if total_attendance >= 1
       self.total_bill / total_attendance
     end
