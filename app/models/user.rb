@@ -27,8 +27,9 @@ class User
   field :expires,            type: Date
   field :friends_data,       type: Array, default: []
 
-  has_many :events
   has_one :authorization
+  has_many :events
+  has_many :rsvps
 
   validates :fb_id, presence: true
 

@@ -8,7 +8,7 @@ module Api
       def create
         if has_params?(*required_params)
           if event = @user.events.create(create_event_options)
-            render json: { event: EventSerializer.new(event, root: false) }
+            render json: EventSerializer.new(event)
           else
             response_with_error(event.errors.full_messages.join('. '), :unprocessable_entity)
           end
@@ -18,7 +18,7 @@ module Api
       def show
         event = Event.where(id: params[:id]).first
         if event
-          render json: { event: EventSerializer.new(event, root: false) }
+          render json: EventSerializer.new(event)
         else
           forbidden_error
         end

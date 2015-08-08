@@ -8,7 +8,7 @@ class Event
   field :status, type: String, default: 'upcoming'
 
   belongs_to :owner, class_name: 'User'
-  has_many :rsvps
+  has_many :rsvps, dependent: :destroy
 
   validates :status, inclusion: { in: %w(upcoming ended), message: "%{value} is not a valid status" }
 end

@@ -52,13 +52,9 @@ class Api::V1::ApplicationController < ApplicationController
         @auth.destroy
         session_not_available_error
       else
-        @user = User.where(:id => @auth.uid).first
+        @user = @auth.user
         if @user.nil?
           no_user_associated_with_token_error
-        else
-          @user.platform = @auth.platform
-          @user.ip = @auth.ip
-          @user.active_now!
         end
       end
     else
