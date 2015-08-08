@@ -10,7 +10,7 @@ module Api
           if event = @user.events.create(create_event_options)
             render json: { event: EventSerializer.new(event, root: false) }
           else
-            response_with_error(event_management.errors, :unprocessable_entity, 'failed')
+            response_with_error(event.errors.full_messages.join('. '), :unprocessable_entity)
           end
         end
       end
