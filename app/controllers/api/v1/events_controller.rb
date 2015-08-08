@@ -27,8 +27,8 @@ module Api
       end
 
       def update
-        if @event.update_attributes(create_bill_options)
-          render json: EventSerializer.new(event)
+        if @event.update_attributes(create_event_options)
+          render json: EventSerializer.new(@event)
         else
           response_with_error(@event.errors.full_messages.join('. '), :unprocessable_entity)
         end
@@ -44,7 +44,7 @@ module Api
       end
 
       def create_event_options
-        params.permit(:name, :start_time, :status)
+        params.permit(:name, :start_time, :status, :total_bill)
       end
     end
   end

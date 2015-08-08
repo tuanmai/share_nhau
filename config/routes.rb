@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   scope module: 'api/v1', path: 'v1' do
     resources :sessions, only: [:create]
-    resources :events, only: [:create, :index, :show]
+    resources :events, only: [:create, :index, :show, :update]
     resources :rsvps, only: [:create, :update, :show]
     resources :bills, only: [:create, :show, :update]
     resources :friends, only: [:index]
