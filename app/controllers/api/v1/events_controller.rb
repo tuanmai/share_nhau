@@ -15,6 +15,15 @@ module Api
         end
       end
 
+      def show
+        event = Event.where(id: params[:id]).first
+        if event
+          render json: { event: EventSerializer.new(event, root: false) }
+        else
+          forbidden_error
+        end
+      end
+
       def required_params
         %w(name start_time)
       end
