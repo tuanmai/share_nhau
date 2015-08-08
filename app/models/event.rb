@@ -9,6 +9,7 @@ class Event
 
   belongs_to :owner, class_name: 'User'
   has_many :rsvps, dependent: :destroy
+  has_many :bills
 
   validates :status, inclusion: { in: %w(upcoming ended), message: "%{value} is not a valid status" }
 end
