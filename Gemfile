@@ -48,5 +48,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 

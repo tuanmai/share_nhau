@@ -7,6 +7,7 @@ module Api
 
       def create
         if has_params?(*required_params)
+          event.rsvps.destroy_all
           params[:user_ids].each do |user_id|
             event.rsvps.first_or_create(user_id: user_id)
           end

@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :_id, :name
+  attributes :user_id, :name
 
-  def _id
+  def user_id
     object.id.to_s
   end
 end
