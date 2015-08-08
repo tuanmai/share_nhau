@@ -10,7 +10,7 @@ module Services
 
       def create
         self.user = default
-        if user
+        if user && user.errors.blank?
           true
         else
           self.errors = "Invalid token"
@@ -20,7 +20,7 @@ module Services
 
 
       def session_response
-        authorization = user.find_or_create_authorization()
+        authorization = user.find_or_create_authorization
         {
           token: authorization.token,
           expires: authorization.expires,

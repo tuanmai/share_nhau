@@ -11,7 +11,7 @@ module Services
 
       def create_new_user
         new_user = ::User.new(default_params.merge(facebook_account_params))
-        new_user.save!
+        new_user.save
         new_user
       end
 
@@ -46,8 +46,10 @@ module Services
         self.user = ::User.where(fb_id: facebook_id).first
 
         if self.user
+          authorization = self.user.find_or_create_authorization
           self.user.set(token: facebook_account_params[:token])
-          self.user.set_long_live_token
+          authorization.set(token: facebook_account_params[:token])
+          authorization.set_long_live_token
         else
           self.user = create_new_user
           self.user.sync_facebook_data

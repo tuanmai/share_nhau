@@ -3,6 +3,7 @@ class User
   include Mongoid::Attributes::Dynamic
   include Mongoid::Extensions::Hash::IndifferentAccess
   include Concerns::User::Session
+  include Concerns::User::Facebook
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   #devise :database_authenticatable, :registerable,
@@ -23,19 +24,18 @@ class User
   field :name,               type: String
   field :fb_id,              type: String
   field :expired_in,         type: Date
+  field :expires,            type: Date
+  field :friends_data,       type: Array, default: []
 
   has_many :events
+  has_one :authorization
 
-  def set_long_live_token
-    if !expired_in || 2.days.from_now > expired_in
-      @long_live_token = CGI::parse(HTTParty.get(facebook_graph_long_live_url).parsed_response)
-      debugger
-      self.set token: @long_live_token['access_token'].first
-      self.set expired_in: 60.days.from_now
-    end
-  end
+  validates :fb_id, presence: true
 
   def facebook_graph_long_live_url
     "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=1629273283955926&client_secret=53d9126cde330907cb687d2be4890cc2&fb_exchange_token=#{self.token}"
+  end
+
+  def user_friends
   end
 end
